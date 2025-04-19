@@ -1,0 +1,22 @@
+# Ignore artifacts:
+build
+coverage
+
+
+# Ignore all node_modules folders
+node_modules
+# Ignore all log files
+*.log
+
+# Ignore all pnpm-lock.yaml files
+pnpm-lock.yaml
+
+# Ignore all .DS_Store files  
+.DS_Store
+# Ignore all .env files
+.env
+
+# Ignore all .vscode folders
+.vscode
+# Ignore all .next folders
+.next
