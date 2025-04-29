@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/client"
 }
 
 datasource db {
@@ -37,5 +38,58 @@ model Resume {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  workExperiences WorkExperience[]
+  educations      Education[]
+  skills          String[]
+
   @@map("resumes")
+}
+
+model WorkExperience {
+  id          String    @id @default(cuid())
+  position    String?
+  company     String?
+  startDate   DateTime?
+  endDate     DateTime?
+  description String?
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("work_experiences")
+}
+
+model Education {
+  id          String    @id @default(cuid())
+  institution String?
+  degree      String?
+  startDate   DateTime?
+  endDate     DateTime?
+  description String?
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("educations")
+}
+
+model UserSubscription {
+  id                      String   @id @default(cuid())
+  userId                  String   @unique
+  stripeCustomerId        String   @unique
+  stripeSubscriptionId    String   @unique
+  stripePriceId           String
+  stripeCurrentPeriodEnd  DateTime
+  stripeCancelAtPeriodEnd Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user_subscriptions")
 }
