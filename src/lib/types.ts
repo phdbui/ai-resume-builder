@@ -1,4 +1,4 @@
-import { Prisma } from "@/generated/client"
+import { Prisma } from "./generated/client"
 import { ResumeValues } from "./validations"
 
 export interface EditorFormData {
